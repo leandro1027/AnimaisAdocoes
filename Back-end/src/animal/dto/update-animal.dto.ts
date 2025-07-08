@@ -1,4 +1,10 @@
 import { PartialType } from '@nestjs/mapped-types';
 import { CreateAnimalDto } from './create-animal.dto';
+import { IsBoolean, IsOptional } from 'class-validator';
 
-export class UpdateAnimalDto extends PartialType(CreateAnimalDto) {}
+export class UpdateAnimalDto extends PartialType(CreateAnimalDto) {
+
+    @IsOptional()
+    @IsBoolean()
+    readonly adotado?: boolean;
+}
