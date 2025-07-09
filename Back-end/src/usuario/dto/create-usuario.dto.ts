@@ -19,4 +19,5 @@ export class CreateUsuarioDto {
     @IsPhoneNumber()
     @IsNotEmpty({message: "O telefone não pode ser vazio!"})
     readonly telefone: string 
+
 }

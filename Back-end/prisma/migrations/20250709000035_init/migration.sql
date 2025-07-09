@@ -1,0 +1,18 @@
+-- CreateTable
+CREATE TABLE "Animal" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "raca" TEXT NOT NULL,
+    "createdAt" DATETIME DEFAULT CURRENT_TIMESTAMP,
+    "adotadoPorId" INTEGER,
+    CONSTRAINT "Animal_adotadoPorId_fkey" FOREIGN KEY ("adotadoPorId") REFERENCES "Usuario" ("id") ON DELETE SET NULL ON UPDATE CASCADE
+);
+
+-- CreateTable
+CREATE TABLE "Usuario" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "nome" TEXT NOT NULL,
+    "cpf" TEXT NOT NULL,
+    "email" TEXT NOT NULL,
+    "ja_adotou" BOOLEAN NOT NULL,
+    "createdAt" DATETIME DEFAULT CURRENT_TIMESTAMP
+);
