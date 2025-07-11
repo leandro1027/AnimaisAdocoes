@@ -1,15 +1,15 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {Controller, Get, Post, Body, Param, Delete, Put} from '@nestjs/common';
 import { AdocaoService } from './adocao.service';
 import { CreateAdocaoDto } from './dto/create-adocao.dto';
 import { UpdateAdocaoDto } from './dto/update-adocao.dto';
 
-@Controller('adocao')
+@Controller('adocoes')
 export class AdocaoController {
   constructor(private readonly adocaoService: AdocaoService) {}
 
   @Post()
-  create(@Body() createAdocaoDto: CreateAdocaoDto) {
-    return this.adocaoService.create(createAdocaoDto);
+  create(@Body() dto: CreateAdocaoDto) {
+    return this.adocaoService.create(dto);
   }
 
   @Get()
@@ -22,9 +22,9 @@ export class AdocaoController {
     return this.adocaoService.findOne(+id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateAdocaoDto: UpdateAdocaoDto) {
-    return this.adocaoService.update(+id, updateAdocaoDto);
+  @Put(':id')
+  update(@Param('id') id: string, @Body() dto: UpdateAdocaoDto) {
+    return this.adocaoService.update(+id, dto);
   }
 
   @Delete(':id')
