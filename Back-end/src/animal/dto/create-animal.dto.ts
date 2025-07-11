@@ -26,6 +26,7 @@ export class CreateAnimalDto {
   @IsBoolean()
   adotado?: boolean;
 
+  @IsOptional()
   @IsInt()
   usuarioId: number;
 }

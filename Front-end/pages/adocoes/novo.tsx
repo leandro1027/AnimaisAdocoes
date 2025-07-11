@@ -1,4 +1,3 @@
-// pages/adocoes/novo.tsx
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import api from '@/services/api';
@@ -10,20 +9,37 @@ interface Animal {
   adotado: boolean;
 }
 
+interface Usuario {
+  id: number;
+  nome: string;
+}
+
 export default function NovaAdocao() {
   const router = useRouter();
   const [animais, setAnimais] = useState<Animal[]>([]);
+  const [usuarios, setUsuarios] = useState<Usuario[]>([]);
   const [animalId, setAnimalId] = useState<number>();
-  const [adotante, setAdotante] = useState('');
+  const [adotanteId, setAdotanteId] = useState<number>();
   const [observacoes, setObservacoes] = useState('');
   const [erro, setErro] = useState('');
 
   useEffect(() => {
-    api.get('/animais').then(res => {
-      const disponiveis = res.data.filter((a: Animal) => !a.adotado);
-      setAnimais(disponiveis);
-      if (disponiveis.length > 0) setAnimalId(disponiveis[0].id);
-    });
+    async function carregarDados() {
+      try {
+        const resAnimais = await api.get('/animais');
+        const disponiveis = resAnimais.data.filter((a: Animal) => !a.adotado);
+        setAnimais(disponiveis);
+        if (disponiveis.length > 0) setAnimalId(disponiveis[0].id);
+
+        const resUsuarios = await api.get('/usuarios');
+        setUsuarios(resUsuarios.data);
+        if (resUsuarios.data.length > 0) setAdotanteId(resUsuarios.data[0].id);
+      } catch (error) {
+        setErro('Erro ao carregar dados.');
+      }
+    }
+
+    carregarDados();
   }, []);
 
   async function handleSubmit(e: React.FormEvent) {
@@ -34,13 +50,23 @@ export default function NovaAdocao() {
       setErro('Selecione um animal.');
       return;
     }
-    if (!adotante.trim()) {
-      setErro('Informe o nome do adotante.');
+    if (!adotanteId) {
+      setErro('Selecione um adotante.');
+      return;
+    }
+
+    const adotanteSelecionado = usuarios.find(u => u.id === adotanteId);
+    if (!adotanteSelecionado) {
+      setErro('Adotante inválido.');
       return;
     }
 
     try {
-      await api.post('/adocoes', { animalId, adotante, observacoes });
+      await api.post('/adocoes', {
+        animalId,
+        adotante: adotanteSelecionado.nome, // envia o nome esperado pelo backend
+        observacoes,
+      });
       router.push('/adocoes');
     } catch (err: any) {
       setErro(err.response?.data?.message || 'Erro ao criar adoção.');
@@ -63,13 +89,12 @@ export default function NovaAdocao() {
           </div>
 
           <div>
-            <label>Nome do Adotante:</label>
-            <input
-              type="text"
-              value={adotante}
-              onChange={e => setAdotante(e.target.value)}
-              required
-            />
+            <label>Adotante:</label>
+            <select value={adotanteId} onChange={e => setAdotanteId(Number(e.target.value))}>
+              {usuarios.map(u => (
+                <option key={u.id} value={u.id}>{u.nome}</option>
+              ))}
+            </select>
           </div>
 
           <div>

@@ -7,11 +7,27 @@ import { UpdateAnimalDto } from './dto/update-animal.dto';
 export class AnimalService {
   constructor(private prisma: PrismaService) {}
 
-  create(data: CreateAnimalDto) {
-    return this.prisma.animal.create({
-      data,
-    });
+async create(data: CreateAnimalDto) {
+  if (!data.usuarioId) {
+    throw new Error('O campo usuarioId é obrigatório e deve ser válido.');
   }
+
+  const createData = {
+    nome: data.nome,
+    especie: data.especie,
+    raca: data.raca,
+    idade: data.idade,
+    descricao: data.descricao,
+    adotado: data.adotado ?? false,
+    usuario: {
+      connect: { id: data.usuarioId },
+    },
+  };
+
+  return await this.prisma.animal.create({ data: createData });
+}
+
+
 
   findAll() {
     return this.prisma.animal.findMany({
