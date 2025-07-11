@@ -4,7 +4,4 @@ import { IsBoolean, IsOptional } from 'class-validator';
 
 export class UpdateAnimalDto extends PartialType(CreateAnimalDto) {
 
-    @IsOptional()
-    @IsBoolean()
-    readonly adotado?: boolean;
 }
