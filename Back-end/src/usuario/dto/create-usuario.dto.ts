@@ -1,23 +1,20 @@
-import { IsNotEmpty, IsNumber, IsPhoneNumber, IsString, MaxLength } from "class-validator"
+import { IsEAN, IsEmail, IsNotEmpty, IsNumber, IsOptional, IsPhoneNumber, IsString, Length, MaxLength } from "class-validator"
 
 export class CreateUsuarioDto {
-
+    
     @IsString()
-    @MaxLength(20, {message: "O nome precisa ter no máximo 20 caracteres!"})
-    @IsNotEmpty({message: "O nome não pode ser vazio!"})
-    readonly nome: string
+  @IsNotEmpty({ message: 'O nome é obrigatório.' })
+  nome: string;
 
-    @IsNumber()
-    @IsNotEmpty({message: "A idade não pode ser vazia!"})
-    readonly idade: number
+  @IsEmail({}, { message: 'E-mail inválido.' })
+  email: string;
 
-    @IsString()
-    @MaxLength(40, {message: "O endereço precisa ter no máximo 40 caracteres!"})
-    @IsNotEmpty({message: "O endereço não pode ser vazio!"})
-    readonly endereco: string
+  @IsOptional()
+  @IsString()
+  @Length(10, 20, { message: 'O telefone deve ter entre 10 e 20 caracteres.' })
+  telefone?: string;
 
-    @IsPhoneNumber()
-    @IsNotEmpty({message: "O telefone não pode ser vazio!"})
-    readonly telefone: string 
-
+  @IsOptional()
+  @IsString()
+  endereco?: string;
 }
