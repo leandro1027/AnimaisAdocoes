@@ -1,20 +1,31 @@
-import { IsEAN, IsEmail, IsNotEmpty, IsNumber, IsOptional, IsPhoneNumber, IsString, Length, MaxLength } from "class-validator"
+import {IsBoolean, IsInt, IsNotEmpty, IsOptional, IsString, Min,} from 'class-validator';
 
-export class CreateUsuarioDto {
-    
-    @IsString()
+export class CreateAnimalDto {
+  @IsString()
   @IsNotEmpty({ message: 'O nome é obrigatório.' })
   nome: string;
 
-  @IsEmail({}, { message: 'E-mail inválido.' })
-  email: string;
+  @IsString()
+  @IsNotEmpty({ message: 'A espécie é obrigatória.' })
+  especie: string;
 
   @IsOptional()
   @IsString()
-  @Length(10, 20, { message: 'O telefone deve ter entre 10 e 20 caracteres.' })
-  telefone?: string;
+  raca?: string;
+
+  @IsOptional()
+  @IsInt({ message: 'A idade deve ser um número inteiro.' })
+  @Min(0, { message: 'A idade deve ser maior ou igual a 0.' })
+  idade?: number;
 
   @IsOptional()
   @IsString()
-  endereco?: string;
+  descricao?: string;
+
+  @IsOptional()
+  @IsBoolean()
+  adotado?: boolean;
+
+  @IsInt()
+  usuarioId: number;
 }
