@@ -1,26 +1,31 @@
-import { MESSAGES } from "@nestjs/core/constants";
-import { IsNotEmpty, IsString, MaxLength } from "class-validator";
+import {IsBoolean, IsInt, IsNotEmpty, IsOptional, IsString, Min,} from 'class-validator';
 
 export class CreateAnimalDto {
+  @IsString()
+  @IsNotEmpty({ message: 'O nome é obrigatório.' })
+  nome: string;
 
-    @IsString()
-    @MaxLength(20, {message: "O nome precisa ter no máximo 20 caracteres!"})
-    readonly nome: string
-    
-    @IsString()
-    @IsNotEmpty({message: "O sexo do animal não pode ser vázio!" })
-    readonly sexo: string
+  @IsString()
+  @IsNotEmpty({ message: 'A espécie é obrigatória.' })
+  especie: string;
 
-    @MaxLength(20, {message: "O nome precisa ter no máximo 20 caracteres!"})
-    @IsNotEmpty({message: "A raça não pode ser vazia"})
-    readonly raca: string
-    
-    @IsString()
-    @IsNotEmpty({message: "O porte do animal não pode ser vázio!" })
-    readonly porte: string
-    
-    readonly adotado: boolean
+  @IsOptional()
+  @IsString()
+  raca?: string;
 
+  @IsOptional()
+  @IsInt({ message: 'A idade deve ser um número inteiro.' })
+  @Min(0, { message: 'A idade deve ser maior ou igual a 0.' })
+  idade?: number;
 
+  @IsOptional()
+  @IsString()
+  descricao?: string;
+
+  @IsOptional()
+  @IsBoolean()
+  adotado?: boolean;
+
+  @IsInt()
+  usuarioId: number;
 }
-
