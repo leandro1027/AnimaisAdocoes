@@ -27,8 +27,6 @@ async create(data: CreateAnimalDto) {
   return await this.prisma.animal.create({ data: createData });
 }
 
-
-
   findAll() {
     return this.prisma.animal.findMany({
       include: {

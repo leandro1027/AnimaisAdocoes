@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://localhost:3000', // Endereço do seu backend Nest.js
+  baseURL: 'http://localhost:3000',
 });
 
 export default api;
