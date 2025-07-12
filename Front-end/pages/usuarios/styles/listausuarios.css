@@ -1,0 +1,79 @@
+main {
+  padding: 2.5rem 1.5rem;
+  max-width: 900px;
+  margin: 2rem auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  color: #1f2a38;
+  margin-bottom: 1.5rem;
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+a {
+  color: #2a82f7;
+  text-decoration: none;
+  margin-left: 1rem;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: #155ab4;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  background: #f9fbfd;
+  margin-bottom: 1rem;
+  padding: 1.25rem 1.5rem;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 6px rgba(42, 130, 247, 0.1);
+  font-size: 1.1rem;
+  color: #2f3e4d;
+  transition: background-color 0.3s ease;
+}
+
+li:hover {
+  background-color: #e6f0ff;
+}
+
+li strong {
+  color: #253746;
+  font-weight: 700;
+  margin-right: 0.5rem;
+}
+
+/* Responsividade básica */
+@media (max-width: 600px) {
+  main {
+    padding: 1.5rem 1rem;
+    margin: 1rem;
+  }
+
+  li {
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 1rem;
+  }
+
+  a {
+    margin-left: 0;
+    margin-top: 0.5rem;
+  }
+}

@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import api from '@/services/api';
 import Navbar from '@/components/navbar';
+import '././styles/listausuarios.css';
+
 
 interface Usuario {
   id: number;

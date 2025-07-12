@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/router';
 import api from '@/services/api';
 import Navbar from '@/components/navbar';
+import './styles/novousuario.css';
 
 export default function NovoUsuario() {
   const router = useRouter();
