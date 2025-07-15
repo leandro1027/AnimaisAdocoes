@@ -1,21 +1,12 @@
 # 🐶🐱 AnimaisAdocoes
 
-Este repositório contém um sistema web completo para cadastro, gerenciamento e adoção de animais resgatados. O projeto foi desenvolvido utilizando tecnologias modernas no padrão full stack, com o objetivo de facilitar o trabalho de ONGs e protetores independentes.
-
-O sistema também incorpora elementos de gamificação para engajar os usuários, além de funcionalidades como upload de fotos, filtros por status, e um painel administrativo para controle geral.
-
----
+Este repositório contém um sistema simples para cadastro, gerenciamento e adoção de animais resgatados. O projeto foi desenvolvido utilizando tecnologias modernas no padrão full stack, com o objetivo de aprendizagem.
 
 ## ✨ Funcionalidades
 
 - Cadastro de usuários
 - Cadastro e gerenciamento de animais resgatados
-- Upload de imagens dos animais
 - Sistema de adoção com vínculo entre animal e adotante
-- Interface intuitiva e responsiva
-- Gamificação (em desenvolvimento)
-- Painel administrativo
-
 ---
 
 ## 🧰 Tecnologias Utilizadas
@@ -50,11 +41,6 @@ AnimaisAdocoes/
 │ └── main.ts # Ponto de entrada do NestJS
 │
 └── prisma/ # Migrations e schema.prisma
-
-yaml
-Copiar
-Editar
-
 ---
 
 ## ▶️ Como Rodar o Projeto
